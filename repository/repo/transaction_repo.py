@@ -8,7 +8,6 @@ from datetime import datetime
 import pytz
 from abc import ABC, abstractmethod
 
-
 class TransactionRepositoryInterface(ABC):
     """Interface for transaction repository operations."""
 
@@ -63,6 +62,7 @@ class TransactionRepository(TransactionRepositoryInterface):
 
             # Create new transaction instance with Sri Lankan time
             transaction = TransactionModel(
+                user_id=transaction_create.user_id,
                 reference_number=transaction_create.reference_number,
                 payment_method=transaction_create.payment_method,
                 amount=transaction_create.amount,
@@ -171,6 +171,7 @@ class TransactionRepository(TransactionRepositoryInterface):
             current_time_sl = datetime.now(sri_lanka_tz)
 
             # Update transaction fields
+            transaction.user_id = transaction_update.user_id
             transaction.reference_number = transaction_update.reference_number
             transaction.payment_method = transaction_update.payment_method
             transaction.amount = transaction_update.amount

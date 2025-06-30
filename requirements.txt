@@ -1,6 +1,6 @@
 fastapi
 uvicorn
-sqlalchemy
+sqlalchemy == 2.0.41
 pydantic
-SQLAlchemy-Continuum
+SQLAlchemy-Continuum == 1.4.2
 pytz

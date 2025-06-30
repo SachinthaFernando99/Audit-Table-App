@@ -2,7 +2,7 @@ import os
 from typing import Generator
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
-import sqlalchemy_continuum
+from sqlalchemy_continuum import make_versioned
 from util.logger import logger
 
 # ---------------- Database Setup ----------------
@@ -24,11 +24,12 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
+# ---------------- Versioning Setup ----------------
+# Enable versioning BEFORE model definitions
+make_versioned(user_cls=None)
+logger.info("Enabled SQLAlchemy-Continuum versioning")
+
 def get_db() -> Generator:
-    """
-    Dependency-injected database session generator.
-    Yields a SQLAlchemy session and ensures proper cleanup.
-    """
     db = SessionLocal()
     try:
         yield db
@@ -36,7 +37,3 @@ def get_db() -> Generator:
         db.close()
         logger.debug("Database session closed.")
 
-# ---------------- Versioning Setup ----------------
-# Enable versioning BEFORE model definitions
-sqlalchemy_continuum.make_versioned(user_cls=None)
-logger.info("Enabled SQLAlchemy-Continuum versioning.")
