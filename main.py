@@ -1,7 +1,6 @@
 import uvicorn
 from fastapi import FastAPI
 from api.transaction_router import router as transaction_router
-
 app = FastAPI()
 
 app.include_router(transaction_router)

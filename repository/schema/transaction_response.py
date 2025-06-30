@@ -3,6 +3,7 @@ from datetime import date, time
 
 class TransactionResponse(BaseModel):
     id: int
+    user_id: str
     reference_number: str
     date: date
     time: time

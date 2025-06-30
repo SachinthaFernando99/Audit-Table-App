@@ -1,7 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, Date, Time
 from sqlalchemy.orm import configure_mappers
-
-from util.logger import logger  # Your logger
+from util.logger import logger
 from util.database import Base, engine  # Import Base and engine from database.py
 
 class TransactionModel(Base):
@@ -13,6 +12,7 @@ class TransactionModel(Base):
     __versioned__ = {}
 
     id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(String, nullable=False)
     reference_number = Column(String, nullable=False)
     payment_method = Column(String, nullable=False)
     amount = Column(Float, nullable=False)
